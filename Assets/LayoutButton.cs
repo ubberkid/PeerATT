@@ -37,6 +37,8 @@ public class LayoutButton : MonoBehaviour {
 		//if (position == 2) {
 		//	setPosition();
 		//}
+
+		unselectObject();
 	}
 	
 	// Update is called once per frame
@@ -54,14 +56,20 @@ public class LayoutButton : MonoBehaviour {
 		//}
 
 		// Select this one
-		if (!selected) {
-			selected = true;
-		}
+
+		selected = true;
 
 		Debug.Log(gameObject.name + " is selected!");
 
 		LayoutButton.currentlySelectedObject = gameObject;
 
+		bindUI();
+	}
+
+	public void unselectObject() {
+
+		selected = false;
+		LayoutButton.currentlySelectedObject = null;
 		bindUI();
 	}
 
@@ -72,9 +80,7 @@ public class LayoutButton : MonoBehaviour {
 
 	public void OnTriggerExit(Collider coll) {
 
-		selected = false;
-		LayoutButton.currentlySelectedObject = null;
-		bindUI();
+		unselectObject();
 	}
 
 	public void moveScreenTo() {
@@ -84,15 +90,15 @@ public class LayoutButton : MonoBehaviour {
 		switch(yPos) {
 
 			case POSITION_TYPE.TOP:
-			mainScreen.GetComponent<MainScreen>().rotateYTo = 4f;
+				mainScreen.GetComponent<MainScreen>().rotateYTo = 4f;
 				break;
 
 			case POSITION_TYPE.MIDDLE:
-			mainScreen.GetComponent<MainScreen>().rotateYTo = 0f;
+				mainScreen.GetComponent<MainScreen>().rotateYTo = 0f;
 				break;
 
 			case POSITION_TYPE.BOTTOM:
-			mainScreen.GetComponent<MainScreen>().rotateYTo = -4f;
+				mainScreen.GetComponent<MainScreen>().rotateYTo = -4f;
 				break;
 		}
 
@@ -110,8 +116,6 @@ public class LayoutButton : MonoBehaviour {
 
 	public void setPosition() {
 
-		GameObject.Find("Debug Text").GetComponent<Text>().text += "Setting Position \n";
-
 		HTTPRequest request = new HTTPRequest(new Uri("http://run-west.att.io/d9576f027ee8f/6e9234f387c9/9c7023eee2b3b23/in/flow/position"), HTTPMethods.Put, setPositionFinished);
 
 		JSONClass data = new JSONClass();
@@ -119,7 +123,6 @@ public class LayoutButton : MonoBehaviour {
 		data["value"] = position.ToString();
 
 		request.AddHeader("Content-Type", "application/json");
-		//request.AddHeader("X-M2X-KEY", "9fc7996ea7f03fccc6ef3978f2a4d012");
 		request.RawData = Encoding.UTF8.GetBytes(data.ToString());
 		request.Send();
 
