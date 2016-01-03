@@ -4,6 +4,7 @@ var device = "8e8402aaa6c97bc7e2f9d5bd6a454fa2";
 var M2XData = {
 	positionTimer: null,
 	actionTimer: null,
+	dlTimer: null,
 
 	frequency: 5000,
 
@@ -34,6 +35,10 @@ var M2XData = {
 		}
 	},
 
+	setAction: function(action) {
+		console.log("Setting action: " + action);
+		m2x.devices.setStreamValue(device, "action", {value: action}, function(result) { console.log(result); }, function(error) { console.log(error); });
+	},
 
 	getAction: function() {
 		M2XData.actionTimer = setTimeout(function() {
@@ -75,17 +80,50 @@ var M2XData = {
 
 	},
 
-	setAction: function(action) {
-		console.log("Setting action: " + action);
-		m2x.devices.setStreamValue(device, "action", {value: action}, function(result) { console.log(result); }, function(error) { console.log(error); });
-	},
-
 	resetAction: function() {
 		console.log("Resetting action");
+		clearTimeout(M2XData.actionTimer);
 		m2x.devices.setStreamValue(device, "action", {value: 0}, function(result) { console.log(result); M2XData.getAction(); }, function(error) { console.log(error); });
 	},
 
+	setDlSwitch: function(action) {
+		console.log("Setting action: " + action);
+		m2x.devices.setStreamValue(device, "dlswitch", {value: action}, function(result) { console.log(result); }, function(error) { console.log(error); });
+	},
+
+	getDlSwitch: function() {
+		M2XData.dlTimer = setTimeout(function() {
+			m2x.devices.streamValues(device, "dlswitch", function(values) { M2XData.gotDlSwitch(values); }, function(error) { console.log(error); });
+		},M2XData.frequency);
+	},
+
+	gotDlSwitch: function(values) {
+
+		var latest = values.values[0].value;
+		console.log("latest DlSwitch: " + latest);
+
+		if(latest == 1) { switchAttLock(); }
+
+		if(latest == 2) { switchAttLight();	}
+
+		if(latest == 3) { switchAttPlug(); }
+
+		if(latest != 0) {
+			M2XData.resetDlSwitch();
+		} else {
+			M2XData.getDlSwitch();
+		}
+	},
+
+	resetDlSwitch: function() {
+		clearTimeout(M2XData.dlTimer);
+		m2x.devices.setStreamValue(device, "dlswitch", {value: 0}, function(result) { console.log(result); M2XData.getDlSwitch(); }, function(error) { console.log(error); });
+	},
 };
+
+
+
 
 M2XData.getPosition();
 M2XData.getAction();
+M2XData.getDlSwitch();

@@ -47,11 +47,11 @@ public class LayoutButton : MonoBehaviour {
 	public void selectObject() {
 
 		// Unselect the other buttons if they are selected
-		foreach(Transform button in buttonsContainer) {
-			button.gameObject.GetComponent<LayoutButton>().selected = false;
-			button.GetComponent<LayoutButton>().bindUI();
+	//	foreach(Transform button in buttonsContainer) {
+		//	button.gameObject.GetComponent<LayoutButton>().selected = false;
+		//	button.GetComponent<LayoutButton>().bindUI();
 
-		}
+		//}
 
 		// Select this one
 		if (!selected) {

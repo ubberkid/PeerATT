@@ -33,7 +33,7 @@
 
 })(jQuery);
 
-    window.server_ip = "10.10.61.89";
+    window.server_ip = "10.10.61.157";
 
     window.bg_pointer = $("#video-background");
     function updateBG() {
