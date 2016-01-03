@@ -16,10 +16,14 @@ public class FloorButton : MonoBehaviour {
 
 		NONE = 0,
 		YES,
-		NO
+		NO,
+		DOOR,
+		LIGHT,
+		PLUG
 	};
 
 	public FLOOR_BUTTON_TYPE buttonType;
+	public int dlSwitch = 0;
 	public bool selected = false;
 
 	// Use this for initialization
@@ -64,18 +68,38 @@ public class FloorButton : MonoBehaviour {
 
 	public void sendAction() {
 
-		GameObject.Find("Debug Text").GetComponent<Text>().text += "Setting Position \n";
+		GetComponent<Animator>().Play("Click");
 
-		HTTPRequest request = new HTTPRequest(new Uri("http://run-west.att.io/d9576f027ee8f/6e9234f387c9/9c7023eee2b3b23/in/flow/action"), HTTPMethods.Put, actionSentCallback);
+		if (buttonType == FLOOR_BUTTON_TYPE.YES || buttonType == FLOOR_BUTTON_TYPE.NO) {
 
-		JSONClass data = new JSONClass();
+			GameObject.Find("Debug Text").GetComponent<Text>().text += "Setting Position \n";
 
-		data["value"] = ((int)buttonType).ToString();
+			HTTPRequest request = new HTTPRequest(new Uri("http://run-west.att.io/d9576f027ee8f/6e9234f387c9/9c7023eee2b3b23/in/flow/action"), HTTPMethods.Put, actionSentCallback);
 
-		request.AddHeader("Content-Type", "application/json");
-		//request.AddHeader("X-M2X-KEY", "9fc7996ea7f03fccc6ef3978f2a4d012");
-		request.RawData = Encoding.UTF8.GetBytes(data.ToString());
-		request.Send();
+			JSONClass data = new JSONClass();
+
+			data["value"] = ((int)buttonType).ToString();
+
+			request.AddHeader("Content-Type", "application/json");
+			//request.AddHeader("X-M2X-KEY", "9fc7996ea7f03fccc6ef3978f2a4d012");
+			request.RawData = Encoding.UTF8.GetBytes(data.ToString());
+			request.Send();
+		} else {
+
+			HTTPRequest request = new HTTPRequest(new Uri("http://run-west.att.io/d9576f027ee8f/6e9234f387c9/9c7023eee2b3b23/in/flow/dlswitch"), HTTPMethods.Put, actionSentCallback);
+
+			JSONClass data = new JSONClass();
+
+			data["value"] = (dlSwitch).ToString();
+
+			request.AddHeader("Content-Type", "application/json");
+			//request.AddHeader("X-M2X-KEY", "9fc7996ea7f03fccc6ef3978f2a4d012");
+			request.RawData = Encoding.UTF8.GetBytes(data.ToString());
+			request.Send();
+		}
+
+
+
 	}
 
 	public void actionSentCallback(HTTPRequest resq, HTTPResponse resp) {

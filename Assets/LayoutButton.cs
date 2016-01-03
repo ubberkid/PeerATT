@@ -79,20 +79,20 @@ public class LayoutButton : MonoBehaviour {
 
 	public void moveScreenTo() {
 
-		screen.localEulerAngles = new Vector3(0f, rotateScreenTo, 0f);
+		mainScreen.GetComponent<MainScreen>().rotateTo = rotateScreenTo;
 
 		switch(yPos) {
 
 			case POSITION_TYPE.TOP:
-				screen.localPosition = new Vector3(0f, 4f, 0f);
+			mainScreen.GetComponent<MainScreen>().rotateYTo = 4f;
 				break;
 
 			case POSITION_TYPE.MIDDLE:
-				screen.localPosition = new Vector3(0f, 0f, 0f);
+			mainScreen.GetComponent<MainScreen>().rotateYTo = 0f;
 				break;
 
 			case POSITION_TYPE.BOTTOM:
-				screen.localPosition = new Vector3(0f, -4f, 0f);
+			mainScreen.GetComponent<MainScreen>().rotateYTo = -4f;
 				break;
 		}
 

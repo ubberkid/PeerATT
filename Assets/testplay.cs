@@ -100,12 +100,18 @@ public class testplay : MonoBehaviour {
 				FloorButton.selectedObject.GetComponent<FloorButton>().sendAction();
 			}
 
-			if (!mainScreen.buttons.activeSelf) {
-				mainScreen.buttons.SetActive(true);
-			} else {
-				mainScreen.buttons.SetActive(false);
-				LayoutButton.currentlySelectedObject = null;
+
+			if (FloorButton.selectedObject == null) { 
+				if (!mainScreen.buttons.activeSelf) {
+					mainScreen.buttons.SetActive(true);
+				} else {
+					mainScreen.buttons.SetActive(false);
+					LayoutButton.currentlySelectedObject = null;
+				}
+			
+			
 			}
+
 
 			//TODO: Insert code here to handle a single tap.  Note that there are other TouchTypes you can check for like directional swipes, but double tap is not currently implemented I believe.
 			/*
