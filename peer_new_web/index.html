@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Peer - Connect</title>
+    <meta name="description" content="Peer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Codeply">
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link href="css/animate.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <nav id="topNav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="#first"> PEER </a>
+            </div>
+            <div class="navbar-collapse collapse" id="bs-navbar">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <!--a class="page-scroll" href="#one">Intro</a-->
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a class="page-scroll" data-toggle="modal" title="Settings" href="#settingsModal"><i class="fa fa-cog"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <header id="first">
+        <div class="header-content">
+            <div class="inner">
+
+                <div class="phoneback">
+                    <img src="#" class="fadeIn wow" id="phone-inner" />
+                    <div id="floaterNav"><canvas id="controller"></canvas></div>
+                
+                    <div id="presetNav" style="display:none;"> 
+                        <div id="prebut1" class="preset_button" onclick="CamCon.ptz_preset(1)"></div> 
+                        <div id="prebut2" class="preset_button" onclick="CamCon.ptz_preset(2)"></div> 
+                        <div id="prebut3" class="preset_button" onclick="CamCon.ptz_preset(3)"></div> 
+                        <div id="prebut4" class="preset_button" onclick="CamCon.ptz_preset(4)"></div> 
+                        <div id="prebut5" class="preset_button" onclick="CamCon.ptz_preset(5)"></div> 
+                        <div id="prebut6" class="preset_button" onclick="CamCon.ptz_preset(6)"></div> 
+                        <div id="prebut7" class="preset_button" onclick="CamCon.ptz_preset(7)"></div> 
+                        <div id="prebut8" class="preset_button" onclick="CamCon.ptz_preset(8)"></div> 
+                        <div id="prebut9" class="preset_button" onclick="CamCon.ptz_preset(9)"></div> 
+                        <div id="prebut10" class="preset_button" onclick="CamCon.ptz_preset(10)"></div> 
+                        <div id="prebut11" class="preset_button" onclick="CamCon.ptz_preset(11)"></div> 
+                        <div id="prebut12" class="preset_button" onclick="CamCon.ptz_preset(12)"></div> 
+                        <div id="prebut13" class="preset_button" onclick="CamCon.ptz_preset(13)"></div> 
+                        <div id="prebut14" class="preset_button" onclick="CamCon.ptz_preset(14)"></div> 
+                        <div id="prebut15" class="preset_button" onclick="CamCon.ptz_preset(15)"></div> 
+                        <div id="prebut16" class="preset_button" onclick="CamCon.ptz_preset(16)"></div> 
+
+                        <div id="returnbut" onclick="CamCon.switchControlStyle()"></div>
+                    </div>
+                </div>
+               
+
+            </div>
+        </div>
+
+        <img src="#" class="wow collapse in" data-wow-delay="0.5s" id="video-background">
+        
+    </header>
+   
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.easing.min.js"></script>
+    <script src="js/wow.js"></script>
+    <script src="js/controller.js"></script>
+
+    <script src="js/scripts.js"></script>
+    <script src="js/m2x-3.0.1.min.js"></script>
+    <script src="js/m2x_connect.js"></script>
+
+  </body>
+</html>
